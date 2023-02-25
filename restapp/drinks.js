@@ -1,5 +1,5 @@
 const db = require("./db");
-const { writeJson, readRequestData, getIdFromUrl } = require("../utils");
+const { writeJson, readRequestData, getIdFromUrl } = require("./utils");
 
 function getAllDrinks(req, res) {
   const drinks = db.getDrinks();
@@ -11,7 +11,7 @@ async function createDrinks(req, res) {
   const drinks = db.getDrinks();
   drinks.push({ ...data, id: Date.now() });
   db.saveDrinks(drinks);
-  writeJson(res, drinks.pop());
+  writeJson(res, drinks);
 }
 
 async function patchOneDrink(req, res) {
@@ -29,6 +29,7 @@ async function patchOneDrink(req, res) {
 }
 
 function getOneDrink(req, res) {
+  const id = getIdFromUrl(req.url);
   const drinks = db.getDrinks();
   const drink = drinks.find((d) => d.id === id);
   if (drink) {
@@ -42,17 +43,17 @@ async function updateOneDrink(req, res) {
   const id = getIdFromUrl(req.url);
   const { name, description, imageUrl, ingredients, userId } =
     await readRequestData(req);
-  if (!userId || !ingredients || !imageUrl || !description || !name) {
+  if (!userId || !description || !ingredients || !name || !id) {
     return writeJson(res, { error: "Drink data missing" }, 403);
   }
   const drinks = db.getDrinks();
   const index = drinks.findIndex((drink) => drink.id === id);
   if (index > -1) {
     drinks.splice(index, 1, {
+      id,
       name,
-      description,
-      imageUrl,
       ingredients,
+      description,
       userId,
     });
     db.saveDrink(drinks);
@@ -62,10 +63,22 @@ async function updateOneDrink(req, res) {
   }
 }
 
+function deleteOneDrink() {
+  const id = getIdFromUrl(req.url);
+  const drinks = db.getDrinks();
+  const index = drinks.findIndex((drink) => drink.id === id);
+  if (index < -1) {
+    drinks.splice(index, 1);
+    db.saveDrinks(drinks);
+  }
+  writeJson(res, { status: "Success" });
+}
+
 module.exports = {
   getAllDrinks,
   createDrinks,
   patchOneDrink,
   getOneDrink,
   updateOneDrink,
+  deleteOneDrink,
 };

@@ -35,7 +35,7 @@ function getDrinks() {
 
 function saveDrinks(drinks = []) {
   try {
-    const data = JSON.stringify(users, null, 4);
+    const data = JSON.stringify(drinks, null, 4);
     writeFileSync(DRINKS_DB_FILE, data);
   } catch (e) {
     throw new Error("Database write error");

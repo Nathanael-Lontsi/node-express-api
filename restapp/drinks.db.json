@@ -2,7 +2,45 @@
     {
         "id": 1,
         "name": "Coco Melon",
-        "ingredients": ["Cocoa", "Melon"],
+        "ingredients": [
+            "Cocoa",
+            "Melon",
+            "Orange",
+            "Lime",
+            "Grappes"
+        ],
+        "description": "A sweet mix of cocoa and water melon with a fruity flavor",
+        "userId": "1163724934883409"
+    },
+    {
+        "name": "Coco Melon",
+        "ingredientsPUT": [
+            "Cocoa",
+            "Melon"
+        ],
         "description": "A sweet mix of Cocoa and water apple",
+        "userId": "1163724934883409",
+        "id": 1677234322129
+    },
+    {
+        "name": "Coco Melon",
+        "ingredientsPUT": [
+            "Cocoa",
+            "Melon"
+        ],
+        "description": "A sweet mix of Cocoa and water apple",
+        "userId": "1163724934883409",
+        "id": 1677236739230
+    },
+    {
+        "name": "Coco Melon",
+        "ingredientsPUT": [
+            "Cocoa",
+            "Melon",
+            "Pineapple"
+        ],
+        "description": "A sweet mix of Cocoa and water apple",
+        "userId": "1163724934883409",
+        "id": 1677364267768
     }
 ]

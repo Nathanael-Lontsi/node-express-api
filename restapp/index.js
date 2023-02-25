@@ -1,7 +1,14 @@
 const http = require("http");
 // const express = require("express");
 const { parse } = require("url");
-const { getAllDrinks, createDrinks } = require("./drinks");
+const {
+  getAllDrinks,
+  createDrinks,
+  patchOneDrink,
+  getOneDrink,
+  updateOneDrink,
+  deleteOneDrink,
+} = require("./drinks");
 
 const {
   getAllUsers,
@@ -85,6 +92,7 @@ function handleDrinksRequest(pathname, req, res) {
         patchOneDrink(req, res);
         return; //handle patch one
       case "DELETE":
+        deleteOneDrink(req, res);
         return; //handle delete one
       default:
         break;
